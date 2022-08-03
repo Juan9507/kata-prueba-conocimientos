@@ -7,23 +7,21 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.test.StepVerifier;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @ExtendWith(MockitoExtension.class)
-class Part01MonoTest {
+class KataReactivoTest {
 
     @InjectMocks
-    Part01Mono part01Mono;
+    KataReactivo kataReactivo;
 
     @Test
     void monoEmty() {
-        var mono = part01Mono.emtyMono();
+        var mono = kataReactivo.emtyMono();
         StepVerifier.create(mono).verifyComplete();
     }
 
     @Test
     void monoHolaMundo(){
-        var mono = part01Mono.monoHolaMundo();
+        var mono = kataReactivo.monoHolaMundo();
         StepVerifier
                 .create(mono)
                 .expectNext("Hola Mundo")
@@ -32,7 +30,7 @@ class Part01MonoTest {
 
     @Test
     void monoUsuario(){
-        var mono = part01Mono.monoUsuario();
+        var mono = kataReactivo.monoUsuario();
         StepVerifier.create(mono).consumeNextWith(usuario -> {
             Assertions.assertEquals(18, usuario.getEdad().intValue());
         }).verifyComplete();
