@@ -35,4 +35,23 @@ class KataReactivoTest {
             Assertions.assertEquals(18, usuario.getEdad().intValue());
         }).verifyComplete();
     }
+
+    @Test
+    void sumarTodasLasCopasAmerica(){
+        var kata = kataReactivo.sumarTodasLasCopasAmerica();
+        StepVerifier
+                .create(kata)
+                .expectNext(17)
+                .verifyComplete();
+    }
+
+    @Test
+    void LosNombreDeLosFutbolistaConEdadMayorADoce(){
+        var kata = kataReactivo.LosNombreDeLosFutbolistaConEdadMayorADoce();
+        StepVerifier
+                .create(kata)
+                .expectNext("Pepito")
+                .expectNext("Jose")
+                .verifyComplete();
+    }
 }
