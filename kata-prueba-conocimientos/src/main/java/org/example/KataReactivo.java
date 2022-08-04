@@ -9,8 +9,8 @@ import reactor.util.function.Tuple2;
 import java.util.List;
 
 /**
- * Programación reactiva flujo con Mono
- * Training ciclo 3 - programacion de software
+ * Kata programación reactiva
+ * Training ciclo 3 - programación de software
  *
  * @author Juan David Rrivera
  * @version [1.0.0]
@@ -26,7 +26,7 @@ public class KataReactivo {
                         new Copas("uefa", 3),
                         new Copas("America", 2)
                 )),
-                new Futbolista("Jose", "Mendez", 17,  List.of(
+                new Futbolista("Jose", "Mendez", 17, List.of(
                         new Copas("uefa", 6),
                         new Copas("America", 1)
                 )),
@@ -47,14 +47,16 @@ public class KataReactivo {
         return Mono.just("Hola Mundo");
     }
 
-    //TODO de un flux de usuarios retornar el usuario que su edad sea igual a 18 como un mono, utilice filter
-    Mono<Futbolista> monoUsuario() {
+    /*TODO del flux futbolista retornar un Mono con el primer flujo encontrado que la edad sea mayor
+        al valor entregado como parametro
+     */
+    Mono<Futbolista> futbolistaEdadIgualAlValor(Integer valor) {
         return futbolista
-                .filter(usuario -> usuario.getEdad() == 18)
+                .filter(usuario -> usuario.getEdad() > valor)
                 .next();
     }
 
-    //TODO sumar todas las copas de los jugadores usar flatmapIterable
+    //TODO sumar todas las copas de los futbolistas usar flatmapIterable
     Mono<Integer> sumarTodasLasCopasAmerica() {
         return futbolista
                 .map(Futbolista::getCopas)
@@ -65,23 +67,24 @@ public class KataReactivo {
     }
 
     //TODO retornar los nombres de los futbolistas que tengan la edad mayor a 12
-    Flux<String> LosNombreDeLosFutbolistaConEdadMayorADoce(){
+    Flux<String> LosNombreDeLosFutbolistaConEdadMayorADoce() {
         return futbolista
                 .filter(futbolista1 -> futbolista1.getEdad() > 12)
                 .map(futbolista1 -> futbolista1.getNombre());
     }
 
-    //TODO combinar dos flujos Mono string, usar zip
-    Flux<Tuple2<String, String>> combinarDosFlujosConZip(){
+    //TODO combinar dos flujos Mono string con los valores "Luis", "Thomas", usar zip
+    Flux<Tuple2<String, String>> combinarDosFlujosConZip() {
         var flujo01 = Mono.just("Luis");
         var flujo02 = Mono.just("Thomas");
 
-        return Flux.zip(flujo01,flujo02);
+        return Flux.zip(flujo01, flujo02);
 
     }
 
-
-
-
+    //TODO retornar la cuenta del numero de flujos emitidos del Flux futbolista
+    Mono<Long> contarNumeroDeFlujos(){
+        return futbolista.count();
+    }
 
 }

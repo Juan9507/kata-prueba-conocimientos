@@ -15,12 +15,14 @@ class KataReactivoTest {
     @InjectMocks
     KataReactivo kataReactivo;
 
+    //TODO realizar el test con StepVerifier
     @Test
     void monoEmty() {
         var mono = kataReactivo.emtyMono();
         StepVerifier.create(mono).verifyComplete();
     }
 
+    //TODO realizar el test con StepVerifier
     @Test
     void monoHolaMundo(){
         var mono = kataReactivo.monoHolaMundo();
@@ -30,14 +32,16 @@ class KataReactivoTest {
                 .verifyComplete();
     }
 
+    //TODO realizar el test con StepVerifier, recomendación usar consumeNextWith
     @Test
-    void monoUsuario(){
-        var mono = kataReactivo.monoUsuario();
-        StepVerifier.create(mono).consumeNextWith(usuario -> {
-            Assertions.assertEquals(18, usuario.getEdad().intValue());
+    void futbolistaEdadIgualAlValor(){
+        var mono = kataReactivo.futbolistaEdadIgualAlValor(12);
+        StepVerifier.create(mono).consumeNextWith(futbolista -> {
+            Assertions.assertEquals(18, futbolista.getEdad().intValue());
         }).verifyComplete();
     }
 
+    //TODO realizar el test con StepVerifier
     @Test
     void sumarTodasLasCopasAmerica(){
         var kata = kataReactivo.sumarTodasLasCopasAmerica();
@@ -47,6 +51,7 @@ class KataReactivoTest {
                 .verifyComplete();
     }
 
+    //TODO realizar el test con StepVerifier
     @Test
     void LosNombreDeLosFutbolistaConEdadMayorADoce(){
         var kata = kataReactivo.LosNombreDeLosFutbolistaConEdadMayorADoce();
@@ -57,6 +62,7 @@ class KataReactivoTest {
                 .verifyComplete();
     }
 
+    //TODO realizar el test con StepVerifier
     @Test
     void combinarDosFlujosConZip(){
         var kata = kataReactivo.combinarDosFlujosConZip();
@@ -65,6 +71,15 @@ class KataReactivoTest {
                     assertThat(res.getT1()).isEqualTo("Luis");
                     assertThat(res.getT2()).isEqualTo("Thomas");
                 })
+                .verifyComplete();
+    }
+
+    //TODO realizar el test con StepVerifier
+    @Test
+    void contarNumeroDeFlujos(){
+        var kata = kataReactivo.contarNumeroDeFlujos();
+        StepVerifier.create(kata)
+                .expectNext(3L)
                 .verifyComplete();
     }
 }
