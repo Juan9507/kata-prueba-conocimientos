@@ -25,4 +25,12 @@ public class Copas {
     public void setNumero(Integer numero) {
         this.numero = numero;
     }
+
+    @Override
+    public String toString() {
+        return "Copas{" +
+                "nombre='" + nombre + '\'' +
+                ", numero=" + numero +
+                '}';
+    }
 }

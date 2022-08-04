@@ -7,6 +7,8 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.test.StepVerifier;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 @ExtendWith(MockitoExtension.class)
 class KataReactivoTest {
 
@@ -52,6 +54,17 @@ class KataReactivoTest {
                 .create(kata)
                 .expectNext("Pepito")
                 .expectNext("Jose")
+                .verifyComplete();
+    }
+
+    @Test
+    void combinarDosFlujosConZip(){
+        var kata = kataReactivo.combinarDosFlujosConZip();
+        StepVerifier.create(kata)
+                .assertNext(res -> {
+                    assertThat(res.getT1()).isEqualTo("Luis");
+                    assertThat(res.getT2()).isEqualTo("Thomas");
+                })
                 .verifyComplete();
     }
 }

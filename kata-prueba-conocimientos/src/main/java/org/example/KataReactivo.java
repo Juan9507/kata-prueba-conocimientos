@@ -4,6 +4,8 @@ import org.example.model.Copas;
 import org.example.model.Futbolista;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.util.function.Tuple2;
+
 import java.util.List;
 
 /**
@@ -20,15 +22,15 @@ public class KataReactivo {
 
     public KataReactivo() {
         futbolista = Flux.just(
-                new Futbolista("Pepito", "Suarez", 18, "pepe@gmail.com", List.of(
+                new Futbolista("Pepito", "Suarez", 18, List.of(
                         new Copas("uefa", 3),
                         new Copas("America", 2)
                 )),
-                new Futbolista("Jose", "Mendez", 17, "jose@gmail.com", List.of(
+                new Futbolista("Jose", "Mendez", 17,  List.of(
                         new Copas("uefa", 6),
                         new Copas("America", 1)
                 )),
-                new Futbolista("lorito", "polo", 12, "loro@gmail.com", List.of(
+                new Futbolista("lorito", "polo", 12, List.of(
                         new Copas("uefa", 4),
                         new Copas("America", 1)
                 ))
@@ -68,5 +70,18 @@ public class KataReactivo {
                 .filter(futbolista1 -> futbolista1.getEdad() > 12)
                 .map(futbolista1 -> futbolista1.getNombre());
     }
+
+    //TODO combinar dos flujos Mono string, usar zip
+    Flux<Tuple2<String, String>> combinarDosFlujosConZip(){
+        var flujo01 = Mono.just("Luis");
+        var flujo02 = Mono.just("Thomas");
+
+        return Flux.zip(flujo01,flujo02);
+
+    }
+
+
+
+
 
 }
