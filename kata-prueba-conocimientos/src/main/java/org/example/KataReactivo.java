@@ -73,7 +73,7 @@ public class KataReactivo {
                 .map(futbolista1 -> futbolista1.getNombre());
     }
 
-    //TODO combinar dos flujos Mono string con los valores "Luis", "Thomas", usar zip
+    //TODO combinar dos flujos Mono string, usar zip
     Flux<Tuple2<String, String>> combinarDosFlujosConZip() {
         var flujo01 = Mono.just("Luis");
         var flujo02 = Mono.just("Thomas");
